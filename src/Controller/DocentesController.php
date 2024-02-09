@@ -11,6 +11,7 @@ use Doctrine\ORM\EntityManagerInterface;
 /**
  * Relación de endpoints del proyecto:
  * - http://127.0.0.1:8000/docentes/insertar-docentes/11223344G/Iván Rodríguez/47
+ * - http://127.0.0.1:8000/alumnos/insertar-alumnos
  */
 
 #[Route('/docentes', name: 'app_docentes_')]
