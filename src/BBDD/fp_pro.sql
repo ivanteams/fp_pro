@@ -38,7 +38,14 @@ SET GLOBAL sql_mode = 'STRICT_TRANS_TABLES';
 # En windows estará en C:\xampp\mysql
 # sql_mode=STRICT_TRANS_TABLES
 
-INSERT INTO docentes
-VALUES ("11223344G", "Iván Rodríguez", 47);
+INSERT INTO docentes VALUES
+("11223344G", "Iván Rodríguez", 47);
 
-# INSERT INTO alumnos
+INSERT INTO alumnos VALUES
+("33334444S", "Blanca Soler", "2000-02-10", 1, 4100.50, "11223344G"),
+("55556666A", "Alba Jiménez", "2000-06-10", 1, 4100.50, "11223344G"),
+("11112222G", "Juan Carlos Romero", "2000-06-10", 0, 4100.50, "11223344G");
+
+SELECT * FROM docentes;
+SELECT * FROM alumnos;
+
