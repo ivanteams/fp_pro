@@ -21,28 +21,40 @@ class AlumnosRepository extends ServiceEntityRepository
         parent::__construct($registry, Alumnos::class);
     }
 
-//    /**
-//     * @return Alumnos[] Returns an array of Alumnos objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('a')
-//            ->andWhere('a.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('a.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
+    //    /**
+    //     * @return Alumnos[] Returns an array of Alumnos objects
+    //     */
+    //    public function findByExampleField($value): array
+    //    {
+    //        return $this->createQueryBuilder('a')
+    //            ->andWhere('a.exampleField = :val')
+    //            ->setParameter('val', $value)
+    //            ->orderBy('a.id', 'ASC')
+    //            ->setMaxResults(10)
+    //            ->getQuery()
+    //            ->getResult()
+    //        ;
+    //    }
 
-//    public function findOneBySomeField($value): ?Alumnos
-//    {
-//        return $this->createQueryBuilder('a')
-//            ->andWhere('a.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
+    //    public function findOneBySomeField($value): ?Alumnos
+    //    {
+    //        return $this->createQueryBuilder('a')
+    //            ->andWhere('a.exampleField = :val')
+    //            ->setParameter('val', $value)
+    //            ->getQuery()
+    //            ->getOneOrNullResult()
+    //        ;
+    //    }
+
+    /**
+     * @return Alumnos[] Array de alumnos con Pagado=1 o Pagado=0
+     */
+    public function alumnosCobrados($pagado): array
+    {
+        return $this->createQueryBuilder('a')
+            ->where('a.pagado = :pagado')
+            ->setParameter('pagado', $pagado)
+            ->getQuery()
+            ->getResult();
+    }
 }
