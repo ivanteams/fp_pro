@@ -17,4 +17,27 @@
         <li>Your template at <code>/var/www/html/fp_pro/templates/alumnos/index.html.twig</code></li>
     </ul>
 </div>
+
+<section class="w-50">
+    <h2>Tabla Alumnas</h2>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>NIF</th>
+                <th>Nombre</th>
+                <th>Importe</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            {% for alumno in alumnos %}
+                <tr>
+                    <td>{{ alumno.nif }}</td>
+                    <td>{{ alumno.nombre }}</td>
+                    <td>{{ alumno.importe }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</section>
 {% endblock %}

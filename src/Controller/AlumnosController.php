@@ -4,6 +4,8 @@ namespace App\Controller;
 
 use App\Entity\Alumnos;
 use App\Entity\Docentes;
+use App\Repository\AlumnosRepository;
+
 use DateTime;
 
 use Doctrine\ORM\EntityManagerInterface;
@@ -85,10 +87,11 @@ class AlumnosController extends AbstractController
     }
 
     #[Route('/consultar-alumnos-cobrados/{pagado}', name: 'consultar_alumnos_cobrados')]
-    public function consultarAlumnosCobrados(ManagerRegistry $doctrine, int $pagado): JsonResponse
+    //public function consultarAlumnosCobrados(ManagerRegistry $doctrine, int $pagado): JsonResponse
+    public function consultarAlumnosCobrados(AlumnosRepository $repoAlumnos, int $pagado): Response
     {
         // endpoint de ejemplo: http://127.0.0.1:8000/alumnos/consultar-alumnos-cobrados/1
-        $repoAlumnos = $doctrine->getRepository(Alumnos::class);
+        // $repoAlumnos = $doctrine->getRepository(Alumnos::class);
         $alumnos = $repoAlumnos->alumnosCobrados($pagado);
 
         $json = array();
@@ -100,12 +103,12 @@ class AlumnosController extends AbstractController
             );
         }
 
-        return new JsonResponse($json);
+        // return new JsonResponse($json);
 
-        /*
+
         return $this->render('alumnos/index.html.twig', [
             'controller_name' => 'AlumnosController',
+            'alumnos' => $alumnos,
         ]);
-        */
     }
 }
