@@ -111,4 +111,37 @@ class AlumnosController extends AbstractController
             'alumnos' => $alumnos,
         ]);
     }
+
+    #[Route('/actualizar-alumno/{nif}/{importe}', name: 'actualizar_alumno')]
+    public function actualizarAlumno(EntityManagerInterface $gestorEntidades, String $nif, float $importe): Response
+    {
+        // Endpoint de ejempo: http://127.0.0.1:8000/alumnos/actualizar-alumno/11112222G/255.50
+        $repoAlumnos = $gestorEntidades->getRepository(Alumnos::class);
+        $alumno = $repoAlumnos->findOneBy(["nif" => $nif]);
+
+        // Si no encuentra el alumno, manda un error...
+        if (!$alumno) {
+            throw $this->createNotFoundException(
+                ('ERRORR!!!! No se ha encontrado: ' . $nif)
+            );
+        }
+
+        $alumno->setPagado(1);
+        $alumno->setImporte($importe);
+        $gestorEntidades->flush();
+
+        // En el redirect, podemos pasar un conjunto de parámetros: Ej: ['pagado' => 1, 'otro' => "a"]
+        return $this->redirectToRoute("app_alumnos_consultar_alumnos_cobrados", ['pagado' => 1]);
+    }
+
+    #[Route('/borrar-alumno/{nif}', name: 'borrar_alumno')]
+    public function borrarAlumno(EntityManagerInterface $gestorEntidades, String $nif): Response
+    {
+        // Endpoint de ejempo: http://127.0.0.1:8000/alumnos/borrar-alumno/11112222G
+        $alumno = $gestorEntidades->getRepository(Alumnos::class)->findOneBy(["nif" => $nif]);
+        $gestorEntidades->remove($alumno);
+        $gestorEntidades->flush();
+
+        return $this->redirectToRoute("app_alumnos_consultar_alumnos_cobrados", ['pagado' => 1]);
+    }
 }
